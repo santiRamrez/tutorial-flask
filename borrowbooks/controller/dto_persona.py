@@ -1,12 +1,14 @@
 #Trae la clase de la carpeta model
-from model.persona import Persona
+from ..model.persona import persona
 
 #Trae la clase de la carpeta dao
-from dao.dao_persona import Dao_Persona
+from ..dao.dao_persona import dao_persona
 
 #Here we're going to create the logic for each entity.
-class Dto_Persona: 
-    def agregar_persona(self, username, email, password):
-        dao_persona = Dao_Persona()
-        resultado = dao_persona.agregar_persona(Persona(username=username, email=email, password=password))
+class dto_persona: 
+    def agregar_persona(self, nombre, apellido_pat, apellido_mat, run, fono, fecha_nacim, email, perfil_id, sede_id, password):
+        Dao_Persona = dao_persona()
+        #Transfiere objeto persona a el controlador de base de datos.
+        resultado = Dao_Persona.agregar_persona(persona(run=run, nombre=nombre, a_paterno=apellido_pat, a_materno=apellido_mat, telefono=fono, fecha_nacimiento=fecha_nacim, email=email, perfil_id=perfil_id, sede_id=sede_id, passwrd=password))
+        # resultado = Dao_Persona.test_env_variables()
         return resultado

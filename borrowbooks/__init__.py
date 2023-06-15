@@ -30,7 +30,10 @@ def create_app(test_config=None):
         return 'Hello, Mundo!'
 
 
-    #Make a blueprint for log in process
+    #Blueprint for authentication view
+    from .views import crud_persona
+    app.register_blueprint(crud_persona.bp)
+
 
     #Make a blueprint for crud blog operations
 
