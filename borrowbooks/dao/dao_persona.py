@@ -1,26 +1,24 @@
+#Created Packages
 from conexdb import conex
+
+#Downloaded Packages
 from dotenv import load_dotenv
 import os
+import click
 
-# Load environment variables from the .env file
-load_dotenv()
 
-# Access the environment variables
-db_host = os.getenv("DB_HOST")
-db_port = os.getenv("DB_PORT")
-db_user = os.getenv("DB_USER")
-db_password = os.getenv("DB_PASSWORD")
-db_name = os.getenv("DB_NAME")
-
-# Use the variables in your Flask app as needed
-# app.config["SECRET_KEY"] = secret_key
-# app.config["SQLALCHEMY_DATABASE_URI"] = database_url
-
-import traceback
-
-class DaoPersona:
+class Dao_Persona:
     def __init__(self):
         try:
+            # Load environment variables from the .env file
+            load_dotenv()
+
+            # Access the environment variables
+            db_host = os.getenv("DB_HOST")
+            db_port = os.getenv("DB_PORT")
+            db_user = os.getenv("DB_USER")
+            db_password = os.getenv("DB_PASSWORD")
+            db_name = os.getenv("DB_NAME")
             # Insert crdentials as env variables.
             self.__conn = conex(db_user, db_password, db_name, db_host, db_port)
         except Exception as ex:
@@ -28,7 +26,8 @@ class DaoPersona:
     
     #Getters
     def getConex(self):
-        return self.__conn
+         self.__conn
+         return click.echo('Conected to the local database.')
 
     #Methods
     def listarUsuarios(self):

@@ -1,6 +1,4 @@
 import psycopg2
-import click
-from flask import current_app, g
 
 class Conex:
     def __init__(self, user, password, dbname, host, port):
@@ -17,5 +15,5 @@ class Conex:
         return self.__connex
 
     def closeConex(self):
-        self.__connex.close()
+        return self.__connex.close()
 
