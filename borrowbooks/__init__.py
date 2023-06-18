@@ -24,11 +24,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, Mundo!'
-
+    #Blueprint for render home view
+    from .views import home
+    app.register_blueprint(home.bp)
 
     #Blueprint for authentication view
     from .views import crud_persona

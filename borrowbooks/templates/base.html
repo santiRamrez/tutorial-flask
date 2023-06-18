@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<title>{% block title %}{% endblock %} - Borrowbooks</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-<nav>
-  <h1>Borrowbooks</h1>
-  <ul>
-    {% if g.user %}
-    <li><span>{{ g.user['username'] }}</span></li>
+<head>
+  <title>{% block title %}{% endblock %} - Borrowbooks</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/filtros.css') }}" />
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      {% block header %}
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <h1 class="fs-4">Borrowbooks</h1>
+        </a>
+      </div>
 
-    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-    <li>{% endif %}</li>
-  </ul>
-</nav>
-<section class="content">
-  <header>{% block header %}{% endblock %}</header>
-  {% for message in get_flashed_messages() %}
-  <div class="flash">{{ message }}</div>
-  {% endfor %} {% block content %}{% endblock %}
-</section>
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Registro Usuario</button>
+      </div>
+      {% endblock %}
+    </header>
+  </div>
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+    {% block footer %}
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+    {% endblock %}
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
