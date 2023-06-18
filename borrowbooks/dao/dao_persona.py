@@ -1,14 +1,14 @@
+import click
+import os
+
 #Created Packages
-from ..conexdb import conex
+from ..conexdb import conexdb
 
 #Downloaded Packages
 from dotenv import load_dotenv
-import os
-import click
-
 # Load environment variables from the .env file
 load_dotenv()
-click.echo("Variables de Entorno Cargadas")
+
 
 class dao_persona:
     def __init__(self):
@@ -19,31 +19,16 @@ class dao_persona:
             db_user = os.getenv("DB_USER")
             db_password = os.getenv("DB_PASSWORD")
             db_name = os.getenv("DB_NAME")
-
             #Insert credentials
-            self.conn = conex(db_user, db_password, db_name, db_host, db_port)
+            self.conn = conexdb.Conex(db_user, db_password, db_name, db_host, db_port)
         except Exception as ex:
             click.echo(ex)
     
     #Getters
     def getConex(self):
-         click.echo('Conected to the local database.')
-         return self.conn
-          
-
-    #Methods
-    # def test_env_variables(self):
-    #     db_host = os.getenv("DB_HOST")
-    #     db_port = os.getenv("DB_PORT")
-    #     db_user = os.getenv("DB_USER")
-    #     db_password = os.getenv("DB_PASSWORD")
-    #     db_name = os.getenv("DB_NAME")
-
-    #     print("DB_HOST:", db_host)
-    #     print("DB_PORT:", db_port)
-    #     print("DB_USER:", db_user)
-    #     print("DB_PASSWORD:", db_password)
-    #     print("DB_NAME:", db_name)
+         if self.conn.getConex():
+             click.echo("\nConectado a la base de datos\n")
+         return self.conn.getConex()
 
     def listarPersonas(self):
         c = self.getConex()
@@ -63,21 +48,22 @@ class dao_persona:
         return result
     
     def agregar_persona(self, per):
-        query = "INSERT INTO persona (run, nombre, apellido_pat, apellido_mat, telefono, fecha_nacimien, perfil_id, sede_sede_id, passwrd, email) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = """INSERT INTO persona (run, nombre, apellido_pat, apellido_mat, telefono, fecha_nacimien, perfil_id, sede_sede_id, passwrd, email) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
         c = self.getConex()
+        cursor = c.cursor()
         result = None
         try:
-            cursor = c.cursor()
-            cursor.execute(query, (per.run, per.nombre, per.a_paterno, per.a_materno, per.telefono, per.fecha_nacimiento, per.perfil_id, per.sede_id, per.passwrd, per.email ))
-
+            cursor.execute(query, (per.run, per.nombre, per.a_paterno, per.a_materno, per.telefono, per.fecha_nacimiento, per.perfil_id, per.sede_id, per.passwrd, per.email))
             c.commit()
             result = True
-            click.echo("\nSe agregaron los datos muñeco!\n")
+            click.echo("\nHa agregado!\n")
 
         # except (Exception, psycopg2.Error) as error:
         #     print("Error while inserting data to PostgreSQL:", error)
 
         except Exception as ex:
+            click.echo()
             result = False
 
         finally:
