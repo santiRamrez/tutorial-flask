@@ -1,5 +1,6 @@
 class persona:
-    def __init__(self, run, nombre, a_paterno, a_materno, telefono, fecha_nacimiento, email, perfil_id, sede_id, passwrd):
+    def __init__(self, id="", run="", nombre="", a_paterno="", a_materno="", telefono="", fecha_nacimiento="", email="", perfil_id="", sede_id="", passwrd=""):
+        self.id = id
         self.run = run
         self.nombre = nombre
         self.a_paterno = a_paterno
@@ -12,7 +13,7 @@ class persona:
         self.passwrd = passwrd
         
 
-    # def __str__(self):
-    #     return "{0} {1} {2} {3} {4} {5} {6} ".format(self.__run, self.__nombre, self.__a_paterno, self.__telefono, self.__fecha_nacimiento, self.__perfil_id, self.__email)
+    def __str__(self):
+        return "{0} {1} {2} {3} {4} {5} {6} ".format(self.run, self.nombre, self.a_paterno, self.telefono, self.fecha_nacimiento, self.perfil_id, self.email)
 
    

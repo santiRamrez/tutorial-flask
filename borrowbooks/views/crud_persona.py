@@ -1,4 +1,4 @@
-# import functools
+import functools
 import click
 
 from flask import (
@@ -10,11 +10,14 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 #Access to the program
 from ..controller.dto_persona import dto_persona
+from .auth import login_required
 
 #Variable to register this view into the app factory at the borrowbooks/__init__.py file
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+bp = Blueprint('register_user', __name__, url_prefix='/user')
+
 
 @bp.route('/register', methods=('GET', 'POST'))
+@login_required
 def register():
     if request.method == 'POST':
         #Recibe datos del usuario.
@@ -39,6 +42,3 @@ def register():
     return render_template('auth/register.html')
 
 #------------------------------------------------------------
-
-
-

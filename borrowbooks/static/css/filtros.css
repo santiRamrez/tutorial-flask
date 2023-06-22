@@ -7,13 +7,23 @@ main {
 main aside {
   border: 1px solid dodgerblue;
   height: 100vh;
-  width: 30%;
-  max-width: 250px;
+  width: 20%;
+  min-width: 150px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+}
+
+main .content {
+  width: 80%;
+}
+
+main .content .flash {
+  width: 100%;
+  height: auto;
+  padding: 16px;
 }
 
 main aside .title-aside {
@@ -28,10 +38,16 @@ main aside .title-aside p {
   font-weight: 600;
   text-align: center;
 }
-.width-card {
-  max-width: 275px;
+
+.cont-cards {
+  margin: 0;
+  display: flex;
+  padding: 0;
+  padding-left: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.card-body p {
-  margin: 0;
+book-card {
+  margin: 10px;
 }

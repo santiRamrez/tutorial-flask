@@ -29,10 +29,16 @@ def create_app(test_config=None):
     app.register_blueprint(home.bp)
 
     #Blueprint for authentication view
+    from .views import auth
+    app.register_blueprint(auth.bp)
+
+    #Blueprint for register and modify user's data view
     from .views import crud_persona
     app.register_blueprint(crud_persona.bp)
 
 
-    #Make a blueprint for crud blog operations
+    #Make a blueprint for GERENTE view
+    from .views import gerente
+    app.register_blueprint(gerente.bp)
 
     return app

@@ -26,9 +26,7 @@ class dao_persona:
     
     #Getters
     def getConex(self):
-         if self.conn.getConex():
-             click.echo("\nConectado a la base de datos\n")
-         return self.conn.getConex()
+        return self.conn.getConex()
 
     def listarPersonas(self):
         c = self.getConex()
@@ -63,7 +61,28 @@ class dao_persona:
         #     print("Error while inserting data to PostgreSQL:", error)
 
         except Exception as ex:
-            click.echo()
+            click.echo(ex)
+            result = False
+
+        finally:
+            cursor.close()
+            c.close()
+        
+        return result
+    
+
+    def login_persona(self, per):
+        query = "SELECT * FROM persona WHERE run = %s and passwrd = %s;"
+        c = self.getConex()
+        cursor = c.cursor()
+        result = None
+        try:
+            cursor.execute(query, (per.run, per.passwrd))
+            result = cursor.fetchone()
+            c.commit()
+        
+        except Exception as ex:
+            click.echo(ex)
             result = False
 
         finally:
