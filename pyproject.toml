@@ -10,7 +10,6 @@ authors = [
 ]
 description = "First app made using Flask and Python"
 readme = "README.md"
-requires-python = ">=3.10"
 license = {text = "BSD-3-Clause"}
 classifiers = [
     "Framework :: Flask",
