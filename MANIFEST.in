@@ -1,0 +1,3 @@
+include borrowbooks/static
+graft borrowbooks/templates
+global-exclude *.pyc

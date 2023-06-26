@@ -1,0 +1,15 @@
+[project]
+name = "borrowbooks"
+version = "1.0.0"
+authors = [
+  { name="Santiago Ramirez", email="sarmejias@gmail.com" },
+]
+description = "First app made using Flask and Python"
+readme = "README.md"
+dependencies = [
+    "flask",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
