@@ -46,7 +46,7 @@ class dao_persona:
         return result
     
     def agregar_persona(self, per):
-        query = """INSERT INTO persona (run, nombre, apellido_pat, apellido_mat, telefono, fecha_nacimien, perfil_id, sede_sede_id, passwrd, email) 
+        query = """INSERT INTO persona (run, nombre, apellido_pat, apellido_mat, telefono, fecha_nacimien, perfil_id, sede_id, passwrd, email) 
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
         c = self.getConex()
         cursor = c.cursor()

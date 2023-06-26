@@ -1,4 +1,5 @@
 class libro:
+    __lista_libros = []
     def __init__(self, isbn, titulo, editorial, year_publicacion, url_img, autores, idioma, escuela_categ_id, estado_libro_id):
         self.isbn = isbn
         self.titulo = titulo
@@ -13,5 +14,10 @@ class libro:
     def __str__(self):
         return "{0} {1} {2} {3} {4} {5} ".format(self.isbn, self.titulo, self.editorial, self.year_publicacion, self.url_img, self.autores)
 
+    def getLista(self):
+        return self.__lista_libros
+    
+    def addLista(self, value):
+        self.getLista().append(value)
    
      

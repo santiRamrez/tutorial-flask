@@ -51,3 +51,18 @@ main aside .title-aside p {
 book-card {
   margin: 10px;
 }
+
+/********************* Register View Style ****************************/
+.register-view {
+  /* border: 1px solid red; */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-view fieldset {
+  /* border: 1px solid blue; */
+}
