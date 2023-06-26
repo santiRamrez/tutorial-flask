@@ -1,3 +1,7 @@
-include borrowbooks/static
 graft borrowbooks/templates
+graft borrowbooks/static
+exclude borrowbooks/conexdb/ciudad.sql
+exclude borrowbooks/conexdb/comuna.sql
+exclude borrowbooks/conexdb/regiones.sql
+exclude borrowbooks/conexdb/schema_ddl.sql
 global-exclude *.pyc
