@@ -1,1 +1,1 @@
-web: gunicorn borrowbooks:create_app()
+web: gunicorn 'buld/lib/borrowbooks:create_app()'

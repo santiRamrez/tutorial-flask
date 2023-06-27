@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+<h1>{% block title %}Home{% endblock %}</h1>
+{% block content %}
+<aside>
+  <div class="title-aside">
+    <p>Filtros de Búsqueda</p>
+  </div>
+  <div class="cont-filter">
+    <p>Por Autor</p>
+  </div>
+  <div class="cont-filter">
+    <p>Por Categoría</p>
+  </div>
+</aside>
+<section class="content">
+  <!-- Show messages to the user below -->
+  <div class="flash">{{ message }}</div>
+  {% for message in get_flashed_messages() %} {% endfor %}
+  <div class="cont-cards">
+    <!------ Start list of books below ------>
+    {% for libro in libros %}
+    <!-- Put 1 card web component here for render dynamically -->
+    <book-card
+      thename="{{libro['titulo']}}"
+      caption="{{libro['year_publicacion']}} - {{libro['autores']}}"
+      img=""
+      estado="green"
+    >
+      <span slot="titulo">{{libro['titulo']}}</span>
+      <span slot="editorial">{{libro['editorial']}}</span>
+      <span slot="autores">{{libro['autores']}}</span>
+      <span slot="año">{{libro['year_publicacion']}}</span>
+      <span slot="idioma">{{libro['idioma']}}</span>
+      <span slot="isbn">{{libro['isbn']}}</span>
+      <span slot="categoria"></span>
+    </book-card>
+    <!------ End list of books below ------>
+  </div>
+  {% if not loop.last %} {% endif %} {% endfor %} {% endblock %}
+</section>

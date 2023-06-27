@@ -10,5 +10,5 @@ instance/
 .coverage
 htmlcov/
 
-build/
+dist/
 *.egg-info/

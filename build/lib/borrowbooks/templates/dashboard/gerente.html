@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+<h1>{% block title %}Gerente{% endblock %}</h1>
+{% block content %}
+<aside>
+  <div class="title-aside">
+    <p>Menú</p>
+  </div>
+  <div class="cont-filter">
+    <p>Préstamos</p>
+  </div>
+  <div class="cont-filter">
+    <p>Multas</p>
+  </div>
+  <div class="cont-filter">
+    <p>Inventario</p>
+  </div>
+  <div class="cont-filter">
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Perfiles
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{{url_for('register_user.register')}}">Nuevo Usuario</a>
+      </div>
+    </div>
+  </div>
+  <div class="cont-filter">
+    <p>Reportes</p>
+  </div>
+</aside>
+<section class="content">
+  <!-- Show messages to the user below -->
+  <div class="flash">{{ message }}</div>
+  {% for message in get_flashed_messages() %} {% endfor %}
+  <div class="cont-cards">
+    <!------ Dashboard ------>
+
+    <!------ End Dashboard ------>
+  </div>
+</section>
+
+{% endblock %}
