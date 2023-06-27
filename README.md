@@ -18,7 +18,7 @@ Este es un pequeño proyecto que forma parte de mi clase del 3° semestre de Ing
 ## Instrucciones para ejecutar el programa.
 
 1. Descargue o clone el repositorio.
-2. Confirme que tenga instalado Python en su versión 3.11: `python3 --version`.
+2. Confirme que tenga instalado Python en su versión 3.10: `python3 --version`.
 3. Instale las dependencias:`pip install`.
 4. Ejecute el programa en modo desarrollo con el siguiente comando:
    `flask --app borrowbooks run --debug`.
