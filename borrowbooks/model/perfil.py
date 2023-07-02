@@ -13,7 +13,18 @@ class perfil:
     
     #---- Methods ----
     def addPerfil(self, val):
-        self.getLista().append(val)
+        lista = self.getLista()
+        found = False
+        if len(lista) > 0:
+          for obj in lista:
+              if val.descrip.upper() == obj.descrip.upper():
+                  found = True
+          if found:
+              return
+          else:
+              return lista.append(val)
+        else:
+          return lista.append(val)
 
     def filtra_por_descripcion(self, value):
         lista = self.getLista()

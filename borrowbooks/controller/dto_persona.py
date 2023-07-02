@@ -23,4 +23,18 @@ class dto_persona:
             return persona(*record)
         else:
             record
+
+    
+    def carga_personas_memoria(self):
+        Dao_Persona = dao_persona()
+        info_db = Dao_Persona.listarPersonas()
+        if info_db:
+            start_persona = persona()
+            for record in info_db:
+                per = persona(*record)
+                start_persona.cargaPersona(per)
+            return start_persona.getLista()
+        else:
+            return False
+
   

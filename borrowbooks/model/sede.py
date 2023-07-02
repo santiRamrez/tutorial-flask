@@ -36,3 +36,12 @@ class sede:
                     return sede
 
         return None
+    
+    def filtra_por_descripcion(self, value):
+        lista = self.getLista()
+        if len(lista) > 0:
+            for sede in lista:
+                if sede.descrip.upper() == value.upper():
+                    return sede
+
+        return None

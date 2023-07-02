@@ -10,7 +10,21 @@
     <p>Multas</p>
   </div>
   <div class="cont-filter">
-    <p>Inventario</p>
+    <div class="dropdown">
+      <button
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Inventario
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{{url_for('register_book.register')}}">Nuevo Libro</a>
+      </div>
+    </div>
   </div>
   <div class="cont-filter">
     <div class="dropdown">

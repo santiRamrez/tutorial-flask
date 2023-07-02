@@ -29,15 +29,18 @@ class dao_persona:
         return self.conn.getConex()
 
     def listarPersonas(self):
+        query = "SELECT * FROM persona;"
         c = self.getConex()
+        cursor = c.cursor()
         result = None
         try:
-            cursor = c.cursor()
-            cursor.execute("SELECT * FROM persona WHERE perfil_id = 1")
+            cursor.execute(query)
             result = cursor.fetchall()
+            c.commit()
 
         except Exception as ex:
-            print(ex)
+            click.echo(ex)
+            result = False
 
         finally:
             cursor.close()
@@ -90,3 +93,4 @@ class dao_persona:
             c.close()
         
         return result
+    

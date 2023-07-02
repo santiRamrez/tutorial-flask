@@ -1,0 +1,153 @@
+{% extends 'base.html' %} {% block content %}
+<aside>
+  <div class="title-aside">
+    <p>Menú</p>
+  </div>
+  <div class="cont-filter">
+    <p>Préstamos</p>
+  </div>
+  <div class="cont-filter">
+    <p>Multas</p>
+  </div>
+  <div class="cont-filter">
+    <div class="dropdown">
+      <button
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Inventario
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{{url_for('register_user.register')}}">Nuevo Libro</a>
+      </div>
+    </div>
+  </div>
+  <div class="cont-filter">
+    <div class="dropdown">
+      <button
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Perfiles
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{{url_for('register_user.register')}}">Nuevo Usuario</a>
+      </div>
+    </div>
+  </div>
+  <div class="cont-filter">
+    <p>Reportes</p>
+  </div>
+</aside>
+<div class="cont-msg">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul class="flashes">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %}
+</div>
+<form method="post" class="register-view">
+  <div class="form-title">
+    <h2>{% block title %}Ingresa Un Nuevo Libro{% endblock %}</h2>
+  </div>
+  <hr />
+  <fieldset>
+    <legend>Datos Principales</legend>
+    <label for="isbn">ISBN</label>
+    <input name="isbn" id="isbn" placeholder="Ej: 978-1-491-99713-2" /><br />
+    <label for="titulo">Título</label>
+    <input name="titulo" id="titulo" required /><br />
+    <label for="editorial">Editorial</label>
+    <input name="editorial" id="editorial" required /><br />
+    <label for="autores">Autores</label>
+    <input name="autores" id="autores" placeholder="Ej: Armin Brun, Santiago Ramírez" required /><br />
+    <label for="idioma">Idioma</label>
+    <input name="idioma" id="idioma" placeholder="Español" required /><br />
+    <label for="year">Año Publicación</label>
+    <input type="text" name="year" id="year" placeholder="2023" required /><br />
+  </fieldset>
+  <hr />
+  <fieldset>
+    <legend>Categoría</legend>
+    <select name="categoria" id="categoria">
+      <option value="{{None}}">--Seleccione Categoría --</option>
+      {% if data.categorias %} {% for cat in data.categorias %}
+      <option value="{{cat.id}}">{{cat.descrip}}</option>
+      {% endfor %} {% endif %}
+    </select>
+    <hr />
+    <select name="sede" id="sede">
+      <option value="{{None}}">--Seleccione Sede --</option>
+      <option value="{{data.sede}}">{{data.sede}}</option>
+    </select>
+    <hr />
+    <label for="serialnum">Número de Serie</label>
+    <input type="text" name="serialnum" id="serialnum" required /><br />
+  </fieldset>
+  <hr />
+  <input type="submit" value="Agregar Libro" />
+</form>
+<aside class="aside-options">
+  <div class="title-aside">
+    <p>Opciones</p>
+  </div>
+  <div class="cont-filter">
+    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Listar Libros
+    </button>
+  </div>
+  <div class="cont-filter">
+    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Editar Libro
+    </button>
+  </div>
+  <div class="cont-filter">
+    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Eliminar Libro
+    </button>
+  </div>
+  <div class="cont-filter">
+    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Asignar Stock por Sede
+    </button>
+  </div>
+</aside>
+
+<!-- Modal -->
+<form
+  method="post"
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Libro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="rutUpdate">Ingrese el ISBN del libro que desea editar</label>
+        <input type="text" id="rutUpdate" name="rutUpdate" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

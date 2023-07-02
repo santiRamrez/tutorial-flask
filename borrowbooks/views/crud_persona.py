@@ -56,7 +56,8 @@ def register():
         #Transfiere datos hacia el controlador
         action = dto_persona().agregar_persona(nombre, apellido_pat, apellido_mat, run, fono, fecha_nacim, email, cargo, sede, password)
         if action:
-            flash("Estamos Ok")
+            flash("Se ha agregado correctamente")
+            return redirect(url_for('home.home'))
 
     return render_template('auth/register.html', data=data)
 

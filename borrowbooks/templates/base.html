@@ -14,9 +14,7 @@
         </a>
       </div>
       <div class="col-md-3">
-        {% if session['user_id'] %}
-        <p>Hola {{session['nombre']}}</p>
-        {% endif %}
+        
       </div>
       <div class="col-md-3 text-end">
         <a href="{{url_for('auth.login')}}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>

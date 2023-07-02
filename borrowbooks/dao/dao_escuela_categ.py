@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class dao_libro:
+class dao_escuela_categ:
     def __init__(self):
         try:
             # Access the environment variables
@@ -28,12 +28,12 @@ class dao_libro:
     def getConex(self):
          return self.conn.getConex()
 
-    def listar_libros(self):
+    def listar_categorias(self):
         c = self.getConex()
         cursor = c.cursor()
         result = None
         try:
-            cursor.execute("SELECT * FROM libro")
+            cursor.execute("SELECT * FROM escuela_categ;")
             result = cursor.fetchall()
 
         except Exception as ex:

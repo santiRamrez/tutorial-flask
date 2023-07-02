@@ -36,9 +36,20 @@ def create_app(test_config=None):
     from .views import crud_persona
     app.register_blueprint(crud_persona.bp)
 
+    #Blueprint for register and modify book's data view
+    from .views import crud_libro
+    app.register_blueprint(crud_libro.bp)
 
     #Make a blueprint for GERENTE view
     from .views import gerente
     app.register_blueprint(gerente.bp)
+
+    #Make a blueprint for ENCARGADO view
+    from .views import encargado
+    app.register_blueprint(encargado.bp)
+
+    #Make a blueprint for ASISTENTE view
+    from .views import asistente
+    app.register_blueprint(asistente.bp)
 
     return app

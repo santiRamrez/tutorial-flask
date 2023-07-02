@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-<h1>{% block title %}Gerente{% endblock %}</h1>
-{% block content %}
+{% extends 'base.html' %} {% block title %}{{data.perfil}}{% endblock %} {% block content %}
 <aside>
   <div class="title-aside">
     <p>Menú</p>
@@ -41,8 +39,14 @@
   {% for message in get_flashed_messages() %} {% endfor %}
   <div class="cont-cards">
     <!------ Dashboard ------>
-
     <!------ End Dashboard ------>
+  </div>
+  <div class="register-view">
+    <div class="form-title">
+      <h2>Hola {{data.nombre}}</h2>
+      <p>Ha ingresado con el perfil {{data.perfil}}</p>
+      <p>Pertenece a la Sede {{data.sede}}</p>
+    </div>
   </div>
 </section>
 

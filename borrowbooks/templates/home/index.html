@@ -35,6 +35,6 @@
       <span slot="categoria"></span>
     </book-card>
     <!------ End list of books below ------>
+    {% if not loop.last %} {% endif %} {% endfor %} {% endblock %}
   </div>
-  {% if not loop.last %} {% endif %} {% endfor %} {% endblock %}
 </section>

@@ -1,20 +1,17 @@
-class sede:
-    __listaSedes = []
-    def __init__(self, id="", descrip="", calle="", num="", comuna_id=""):
+class escuela_categ:
+    __listaCategorias = []
+    def __init__(self, id="", descrip=""):
         self.id = id
         self.descrip = descrip
-        self.calle = calle
-        self.num = num
-        self.comuna_id = comuna_id
 
     def __str__(self):
-        return "{0} {1} {2}".format(self.id, self.descrip, self.calle, self.num)
+        return "{0} {1} {2}".format(self.id, self.descrip)
     
     def getLista(self):
-        return self.__listaSedes
+        return self.__listaCategorias
     
     #---- Methods ----
-    def addSede(self, val):
+    def addCategoria(self, val):
         lista = self.getLista()
         found = False
         if len(lista) > 0:
@@ -28,11 +25,11 @@ class sede:
         else:
           return lista.append(val)
 
-    def filtra_por_id(self, value):
+    def filtra_por_descripcion(self, value):
         lista = self.getLista()
         if len(lista) > 0:
-            for sede in lista:
-                if sede.id == value:
-                    return sede
+            for categ in lista:
+                if categ.descrip.upper() == value.upper():
+                    return categ
 
         return None

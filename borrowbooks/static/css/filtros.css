@@ -1,3 +1,7 @@
+body {
+  padding-bottom: 32px;
+}
+
 main {
   display: flex;
   flex-direction: row;
@@ -18,12 +22,7 @@ main aside {
 
 main .content {
   width: 80%;
-}
-
-main .content .flash {
-  width: 100%;
-  height: auto;
-  padding: 16px;
+  /* border: 1px solid blue; */
 }
 
 main aside .title-aside {
@@ -46,6 +45,7 @@ main aside .title-aside p {
   padding-left: 10px;
   flex-direction: row;
   flex-wrap: wrap;
+  /* border: 1px solid red; */
 }
 
 book-card {
@@ -55,14 +55,43 @@ book-card {
 /********************* Register View Style ****************************/
 .register-view {
   /* border: 1px solid red; */
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.register-view fieldset legend {
+  /* border: 1px solid blue; */
+  text-align: center;
 }
 
 .register-view fieldset {
   /* border: 1px solid blue; */
+  width: 100%;
+  text-align: center;
 }
+
+.register-view fieldset label {
+  /* border: 1px solid blue; */
+  width: 30%;
+}
+.register-view fieldset input {
+  /* border: 1px solid blue; */
+  width: 60%;
+}
+
+.aside-options .cont-filter,
+aside .cont-filter {
+  padding: 5px 0;
+}
+
+.aside-options .cont-filter button,
+aside .cont-filter button {
+  padding: 5px 0;
+  width: 150px;
+}
+
+/****************** Main Dashboard *********************/

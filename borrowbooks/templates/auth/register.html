@@ -15,7 +15,7 @@
   <div class="cont-filter">
     <div class="dropdown">
       <button
-        class="btn btn-secondary dropdown-toggle"
+        class="btn btn-primary dropdown-toggle"
         type="button"
         id="dropdownMenuButton"
         data-bs-toggle="dropdown"
@@ -43,7 +43,9 @@
   {% endif %} {% endwith %}
 </div>
 <form method="post" class="register-view">
-  <h2>{% block title %}Crea Usuario{% endblock %}</h2>
+  <div class="form-title">
+    <h2>{% block title %}Crea Usuario{% endblock %}</h2>
+  </div>
   <fieldset>
     <legend>Identificación</legend>
     <label for="nombre">Nombre</label>
@@ -88,4 +90,48 @@
   <input type="password" name="password" id="password" required /><br />
   <input type="submit" value="Register" />
 </form>
+<aside class="aside-options">
+  <div class="title-aside">
+    <p>Opciones</p>
+  </div>
+  <div class="cont-filter">
+    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Editar Usuario
+    </button>
+  </div>
+  <div class="cont-filter">
+    <button class="btn btn-secondary" type="button">Borrar Usuario</button>
+  </div>
+  <div class="cont-filter">
+    <p>Inventario</p>
+  </div>
+</aside>
+
+<!-- Modal -->
+<form
+  method="post"
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Usuario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="rutUpdate">Ingrese el RUT del usuario que desea editar</label>
+        <input type="text" id="rutUpdate" name="rutUpdate" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</form>
+
 {% endblock %}
