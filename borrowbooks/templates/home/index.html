@@ -20,12 +20,7 @@
     <!------ Start list of books below ------>
     {% for libro in libros %}
     <!-- Put 1 card web component here for render dynamically -->
-    <book-card
-      thename="{{libro['titulo']}}"
-      caption="{{libro['year_publicacion']}} - {{libro['autores']}}"
-      img=""
-      estado="green"
-    >
+    <book-card thename="{{libro['titulo']}}" caption="{{libro['year_publicacion']}}" img="" estado="green">
       <span slot="titulo">{{libro['titulo']}}</span>
       <span slot="editorial">{{libro['editorial']}}</span>
       <span slot="autores">{{libro['autores']}}</span>

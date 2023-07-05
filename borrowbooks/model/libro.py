@@ -1,6 +1,6 @@
 class libro:
     __lista_libros = []
-    def __init__(self, isbn, titulo, editorial, year_publicacion, url_img, autores, idioma, escuela_categ_id, estado_libro_id):
+    def __init__(self, isbn="", titulo="", editorial="", year_publicacion="", url_img="", autores="", idioma="", escuela_categ_id="", estado_libro_id=""):
         self.isbn = isbn
         self.titulo = titulo
         self.editorial = editorial
@@ -17,7 +17,25 @@ class libro:
     def getLista(self):
         return self.__lista_libros
     
-    def addLista(self, value):
-        self.getLista().append(value)
+    def addLibro(self, val):
+        lista = self.getLista()
+        found = False
+        if len(lista) > 0:
+          for obj in lista:
+              if val.titulo.upper() == obj.titulo.upper():
+                  found = True
+          if found:
+              return
+          else:
+              return lista.append(val)
+        else:
+          return lista.append(val)
    
-     
+    def filtra_por_descripcion(self, libro):
+        lista = self.getLista()
+        if len(lista) > 0:
+            for obj in lista:
+                if obj.titulo.upper() == libro.titulo.upper():
+                    return obj
+
+        return None

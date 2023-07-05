@@ -45,6 +45,23 @@ class dao_libro:
 
         return result
     
+    def listar_ejemplares(self):
+        c = self.getConex()
+        cursor = c.cursor()
+        result = None
+        try:
+            cursor.execute("SELECT * FROM ejemplar")
+            result = cursor.fetchall()
+
+        except Exception as ex:
+            print(ex)
+
+        finally:
+            cursor.close()
+            c.close()
+
+        return result
+    
     def agregar_libro(self, l):
         query = """INSERT INTO libro (isbn, titulo, editorial, year_publicacion, url_img, autores, idioma, escuela_categ_id, estado_libro_id) 
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"""
@@ -67,13 +84,13 @@ class dao_libro:
         return result
     
     def agregar_ejemplar(self, ej):
-        query = """INSERT INTO ejemplar (n_serie, libro_isbn, sede_id, id_n_devol, id_n_prestamo, estado_id) 
-                    VALUES (%s, %s, %s, %s, %s, %s);"""
+        query = """INSERT INTO ejemplar (libro_isbn, sede_id, id_n_devol, id_n_prestamo, estado_id) 
+                    VALUES (%s, %s, %s, %s, %s);"""
         c = self.getConex()
         cursor = c.cursor()
         result = None
         try:
-            cursor.execute(query, (ej.n_serie, ej.libro_isbn, ej.sede_id, ej.id_n_devol, ej.id_n_prestamo, 1))
+            cursor.execute(query, (ej.libro_isbn, ej.sede_id, ej.id_n_devol, ej.id_n_prestamo, ej.estado_id))
             c.commit()
             result = True
             click.echo("\nHa agregado!\n")

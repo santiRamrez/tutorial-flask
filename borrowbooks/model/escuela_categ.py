@@ -15,13 +15,13 @@ class escuela_categ:
         lista = self.getLista()
         found = False
         if len(lista) > 0:
-          for obj in lista:
-              if val.descrip.upper() == obj.descrip.upper():
-                  found = True
-          if found:
-              return
-          else:
-              return lista.append(val)
+            for obj in lista:
+                if val.descrip.upper() == obj.descrip.upper():
+                    found = True
+            if found:
+                return
+            else: 
+                return lista.append(val)
         else:
           return lista.append(val)
 

@@ -40,6 +40,10 @@ def create_app(test_config=None):
     from .views import crud_libro
     app.register_blueprint(crud_libro.bp)
 
+    #Blueprint for register and modify borrow's data view
+    from .views import crud_prestamo
+    app.register_blueprint(crud_prestamo.bp)
+
     #Make a blueprint for GERENTE view
     from .views import gerente
     app.register_blueprint(gerente.bp)

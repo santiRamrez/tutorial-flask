@@ -47,16 +47,12 @@
     <p>Reportes</p>
   </div>
 </aside>
-<div class="cont-msg">
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <ul class="flashes">
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} {% endwith %}
-</div>
 <form method="post" class="register-view">
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+  <div class="alert alert-info" role="alert">
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
   <div class="form-title">
     <h2>{% block title %}Ingresa Un Nuevo Libro{% endblock %}</h2>
   </div>
@@ -78,7 +74,6 @@
   </fieldset>
   <hr />
   <fieldset>
-    <legend>Categoría</legend>
     <select name="categoria" id="categoria">
       <option value="{{None}}">--Seleccione Categoría --</option>
       {% if data.categorias %} {% for cat in data.categorias %}
@@ -91,8 +86,6 @@
       <option value="{{data.sede}}">{{data.sede}}</option>
     </select>
     <hr />
-    <label for="serialnum">Número de Serie</label>
-    <input type="text" name="serialnum" id="serialnum" required /><br />
   </fieldset>
   <hr />
   <input type="submit" value="Agregar Libro" />
@@ -107,17 +100,17 @@
     </button>
   </div>
   <div class="cont-filter">
-    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editarLibro">
       Editar Libro
     </button>
   </div>
   <div class="cont-filter">
-    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#eliminarLibro">
       Eliminar Libro
     </button>
   </div>
   <div class="cont-filter">
-    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#stockSede">
       Asignar Stock por Sede
     </button>
   </div>
@@ -127,7 +120,7 @@
 <form
   method="post"
   class="modal fade"
-  id="exampleModal"
+  id="editarLibro"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
@@ -145,6 +138,77 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Modal Eliminar Libro -->
+<form
+  method="post"
+  class="modal fade"
+  id="eliminarLibro"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Libro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="rutUpdate">Ingrese el ISBN del libro que desea editar</label>
+        <input type="text" id="rutUpdate" name="rutUpdate" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Modal Stock Libro por Sede -->
+<form
+  method="post"
+  class="modal fade"
+  id="stockSede"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Libro Por Sede</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <select name="stockLibro" id="stockLibro" autocomplete="off">
+          <option>-- Selecciona Libro --</option>
+          {% if data.libros %} {% for libro in data.libros %}
+          <option value="{{libro.isbn}}">{{libro.titulo}}</option>
+          {% endfor %} {% endif %}
+        </select>
+        <hr />
+        <select name="stockSede" id="stockSede" autocomplete="off">
+          <option>-- Selecciona Sede --</option>
+          {% if data.sedes %} {% for sede in data.sedes %}
+          <option value="{{sede.id}}">{{sede.descrip}}</option>
+          {% endfor %} {% endif %}
+        </select>
+        <hr />
+        <label for="qtyStock">Cantidad Stock</label>
+        <input type="number" min="1" max="1" id="qtyStock" name="qtyStock" />
+        <hr />
+        <label for="stock">Confirmo Datos</label>
+        <input type="checkbox" id="stock" name="stock" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Agregar</button>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 class ejemplar:
     __listaEjemplares = []
-    def __init__(self, n_serie="", libro_isbn="", sede_id="", id_n_devol="", id_n_prestamo="", estado_id=""):
+    def __init__(self, libro_isbn="", sede_id="", id_n_devol="", id_n_prestamo="", estado_id="", n_serie=""):
         self.n_serie = n_serie
         self.libro_isbn = libro_isbn
         self.sede_id = sede_id
@@ -29,11 +29,11 @@ class ejemplar:
         else:
           return lista.append(val)
 
-    # def filtra_por_descripcion(self, value):
-    #     lista = self.getLista()
-    #     if len(lista) > 0:
-    #         for ejemp in lista:
-    #             if ejemp.descrip.upper() == value.upper():
-    #                 return ejemp
-
-    #     return None
+    def checkSerialNum(self, value):
+        lista = self.getLista()
+        if len(lista) > 0:
+            for ejemp in lista:
+                if ejemp.n_serie.upper() == value.upper():
+                    return True
+            return None
+        return None

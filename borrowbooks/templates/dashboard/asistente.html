@@ -4,7 +4,21 @@
     <p>Menú</p>
   </div>
   <div class="cont-filter">
-    <p>Préstamos</p>
+    <div class="dropdown">
+      <button
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Préstamos
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{{url_for('register_borrow.menu')}}">Registra Préstamo</a>
+      </div>
+    </div>
   </div>
   <div class="cont-filter">
     <p>Multas</p>
@@ -13,21 +27,7 @@
     <p>Inventario</p>
   </div>
   <div class="cont-filter">
-    <div class="dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-bs-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Perfiles
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{{url_for('register_user.register')}}">Nuevo Usuario</a>
-      </div>
-    </div>
+    <p>Perfiles</p>
   </div>
   <div class="cont-filter">
     <p>Reportes</p>
