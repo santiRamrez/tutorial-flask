@@ -10,14 +10,14 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 #Access to the program
-from ..controller.dto_libro import dto_libro
-from ..controller.dto_escuela_categ import dto_escuela_categ
-from ..controller.dto_sede import dto_sede
-from ..model.sede import sede as Sede
-from .auth import login_required
+from ...controller.dto_libro import dto_libro
+from ...controller.dto_escuela_categ import dto_escuela_categ
+from ...controller.dto_sede import dto_sede
+from ...model.sede import sede as Sede
+from ..auth.auth import login_required
 
 #Variable to register this view into the app factory at the borrowbooks/__init__.py file
-bp = Blueprint('register_book', __name__, url_prefix='/book')
+bp = Blueprint('register_book', __name__, url_prefix='/inventory')
 
 
 @bp.route('/register', methods=('GET', 'POST'))

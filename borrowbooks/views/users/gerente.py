@@ -1,4 +1,6 @@
+import functools
 import click
+import re
 
 from flask import (
     Blueprint, flash, redirect, render_template, request, session, url_for
@@ -8,20 +10,21 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 #Access to the program
-from ..controller.dto_persona import dto_persona
-from .auth import login_required
+# from ...controller.dto_persona import dto_persona
+from ..auth.auth import login_required
 
 #Variable to register this view into the app factory at the borrowbooks/__init__.py file
-bp = Blueprint('asistente', __name__, url_prefix='/user')
+bp = Blueprint('gerente', __name__, url_prefix='/user')
 
-@bp.route('/asistente', methods=('GET', 'POST'))
+@bp.route('/gerente', methods=('GET', 'POST'))
 @login_required
 def menu():
     data = {}
     txt = session.get('user_str')
     data['sede'] = txt[txt.index("INACAP"):]
     lista = txt.split(" ")
-    data['nombre'] = lista[1] + " " + lista[2]
-    data['perfil'] = lista[5].capitalize()
+    filtered = [val for val in lista if len(val) > 0]
+    data['nombre'] = filtered[1] + " " + filtered[2]
+    data['perfil'] = filtered[5].capitalize()
   
-    return render_template('dashboard/asistente.html', data=data)
+    return render_template('dashboard/gerente.html', data=data)

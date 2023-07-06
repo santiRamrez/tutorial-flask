@@ -6,7 +6,7 @@ from flask import (
 )
 
 #Access to the program
-from ..controller.dto_libro import dto_libro
+from ...controller.dto_libro import dto_libro
 
 #Variable to register this view into the app factory at the borrowbooks/__init__.py file
 bp = Blueprint('home', __name__)

@@ -25,35 +25,35 @@ def create_app(test_config=None):
         pass
 
     #Blueprint for render home view
-    from .views import home
+    from .views.home import home
     app.register_blueprint(home.bp)
 
     #Blueprint for authentication view
-    from .views import auth
+    from .views.auth import auth
     app.register_blueprint(auth.bp)
 
     #Blueprint for register and modify user's data view
-    from .views import crud_persona
-    app.register_blueprint(crud_persona.bp)
+    from .views.users import register
+    app.register_blueprint(register.bp)
 
     #Blueprint for register and modify book's data view
-    from .views import crud_libro
-    app.register_blueprint(crud_libro.bp)
+    from .views.inventory import register as register_book
+    app.register_blueprint(register_book.bp)
 
     #Blueprint for register and modify borrow's data view
-    from .views import crud_prestamo
-    app.register_blueprint(crud_prestamo.bp)
+    from .views.borrows import prestamo_register
+    app.register_blueprint(prestamo_register.bp)
 
     #Make a blueprint for GERENTE view
-    from .views import gerente
+    from .views.users import gerente
     app.register_blueprint(gerente.bp)
 
     #Make a blueprint for ENCARGADO view
-    from .views import encargado
+    from .views.users import encargado
     app.register_blueprint(encargado.bp)
 
     #Make a blueprint for ASISTENTE view
-    from .views import asistente
+    from .views.users import asistente
     app.register_blueprint(asistente.bp)
 
     return app

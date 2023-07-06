@@ -10,17 +10,16 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 #Access to the program
-from ..controller.dto_libro import dto_libro
-from ..controller.dto_escuela_categ import dto_escuela_categ
-from .auth import login_required
+from ...controller.dto_libro import dto_libro
+from ...controller.dto_escuela_categ import dto_escuela_categ
+from ..auth.auth import login_required
 
 #Variable to register this view into the app factory at the borrowbooks/__init__.py file
 bp = Blueprint('register_borrow', __name__, url_prefix='/borrow')
 
-
-@bp.route('/menu', methods=('GET', 'POST'))
+@bp.route('/register', methods=('GET', 'POST'))
 @login_required
-def menu():
+def register():
     data = {}
     
     
@@ -50,4 +49,4 @@ def menu():
     #     else:
     #         flash("Hay un error")
 
-    return render_template('dashboard/prestamo.html', data=data)
+    return render_template('dashboard/borrow/register.html', data=data)
