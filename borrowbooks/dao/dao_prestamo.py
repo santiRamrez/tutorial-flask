@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class dao_libro:
+class dao_prestamo:
     def __init__(self):
         try:
             # Access the environment variables
@@ -28,12 +28,12 @@ class dao_libro:
     def getConex(self):
          return self.conn.getConex()
 
-    def listar_libros(self):
+    def listar_prestamos(self):
         c = self.getConex()
         cursor = c.cursor()
         result = None
         try:
-            cursor.execute("SELECT * FROM libro")
+            cursor.execute("SELECT * FROM nota_prestamo")
             result = cursor.fetchall()
 
         except Exception as ex:
@@ -45,12 +45,13 @@ class dao_libro:
 
         return result
     
-    def listar_ejemplares(self):
+    def listar_persona_notaprest(self):
+        #Relaciona la persona con la nota de préstamo
         c = self.getConex()
         cursor = c.cursor()
         result = None
         try:
-            cursor.execute("SELECT * FROM ejemplar")
+            cursor.execute("SELECT * FROM persona_notaprest")
             result = cursor.fetchall()
 
         except Exception as ex:
@@ -62,14 +63,14 @@ class dao_libro:
 
         return result
     
-    def agregar_libro(self, l):
-        query = """INSERT INTO libro (isbn, titulo, editorial, year_publicacion, url_img, autores, idioma, escuela_categ_id, estado_libro_id) 
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+    def agregar_nota_prestamo(self, prest):
+        query = """INSERT INTO nota_prestamo (fecha_prestamo, fecha_devol, renov) 
+                    VALUES (%s, %s, %s);"""
         c = self.getConex()
         cursor = c.cursor()
         result = None
         try:
-            cursor.execute(query, (l.isbn, l.titulo, l.editorial, l.year_publicacion, l.url_img, l.autores, l.idioma, l.escuela_categ_id, 1))
+            cursor.execute(query, (prest.fecha_prestamo, prest.fecha_devol, prest.renov))
             c.commit()
             result = True
             click.echo("\nHa agregado!\n")
@@ -83,14 +84,14 @@ class dao_libro:
 
         return result
     
-    def agregar_ejemplar(self, ej):
-        query = """INSERT INTO ejemplar (libro_isbn, sede_id, id_n_devol, id_n_prestamo, estado_id) 
-                    VALUES (%s, %s, %s, %s, %s);"""
+    def agregar_persona_notaprest(self, rec):
+        query = """INSERT INTO persona_notaprest (per_id, nota_prestamo_prest_id) 
+                    VALUES (%s, %s);"""
         c = self.getConex()
         cursor = c.cursor()
         result = None
         try:
-            cursor.execute(query, (ej.libro_isbn, ej.sede_id, ej.id_n_devol, ej.id_n_prestamo, ej.estado_id))
+            cursor.execute(query, (rec.per_id, rec.nota_prestamo_prest_id))
             c.commit()
             result = True
             click.echo("\nHa agregado!\n")
@@ -103,26 +104,3 @@ class dao_libro:
             c.close()
 
         return result
-    
-    def listar_ejemplares_disponibles_por_sede(self, isbn, id_sede):
-        # -- Estados_Libros ---> Disponible: 1 / Prestado: 2 / Retraso Devolución: 3
-        query = """ SELECT serial_num, isbn, titulo, sede_id, estado_id 
-                    FROM ejemplar JOIN libro 
-                    ON isbn = libro_isbn
-                    WHERE sede_id = %s and estado_id = %s and isbn = %s;"""
-        c = self.getConex()
-        cursor = c.cursor()
-        result = None
-        try:
-            cursor.execute(query, (id_sede, 1, isbn))
-            result = cursor.fetchall()
-
-        except Exception as ex:
-            print(ex)
-
-        finally:
-            cursor.close()
-            c.close()
-
-        return result
-    

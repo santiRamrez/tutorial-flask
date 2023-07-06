@@ -96,3 +96,32 @@ aside .cont-filter button {
 }
 
 /****************** Main Dashboard *********************/
+.form-results {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  transition: all 1s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-results form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 600px;
+  margin-top: 10px;
+  padding: 16px;
+}
+
+.form-results h2 {
+  color: #fff;
+}

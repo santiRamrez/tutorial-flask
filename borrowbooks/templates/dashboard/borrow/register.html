@@ -33,16 +33,12 @@
     <p>Reportes</p>
   </div>
 </aside>
-<div class="cont-msg">
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <ul class="flashes">
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} {% endwith %}
-</div>
 <form method="post" class="register-view">
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+  <div class="alert alert-info" role="alert">
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
   <div class="form-title">
     <h2>{% block title %}Registre Préstamo{% endblock %}</h2>
   </div>
@@ -50,25 +46,47 @@
   <fieldset>
     <select name="benef" id="benef">
       <option>--Seleccione Beneficiario --</option>
-      <!-- {% if data.categorias %} {% for cat in data.categorias %} -->
-      <option value=""></option>
-      <!-- {% endfor %} {% endif %} -->
+      {% if data.beneficiarios %} {% for benef in data.beneficiarios %}
+      <option value="{{benef.id}}">{{benef.nombre}} {{benef.a_paterno}}</option>
+      {% endfor %} {% endif %}
     </select>
     <hr />
     <select name="sede" id="sede">
-      <option value="{{None}}">--Seleccione Sede --</option>
-      <option value="{{data.sede}}">{{data.sede}}</option>
+      <option value="0">--Seleccione Sede --</option>
+      {% if data.lista_sedes %} {% for s in data.lista_sedes %}
+      <option value="{{s.id}}">{{s.descrip}}</option>
+      {% endfor %} {% endif %}
     </select>
     <hr />
-    <select name="sede" id="sede">
-      <option>--Seleccione Libro --</option>
-      <option value="">X Libro</option>
+    <select name="libro" id="libro">
+      <option value="0">--Seleccione Libro --</option>
+      {% if data.lista_libros %} {% for lib in data.lista_libros %}
+      <option value="{{lib.isbn}}">{{lib.titulo}}</option>
+      {% endfor %} {% endif %}
     </select>
     <hr />
   </fieldset>
   <hr />
-  <input class="btn btn-primary dropdown-toggle" type="submit" value="Registra Préstamo" />
+  <input class="btn btn-primary dropdown-toggle" type="submit" value="Check Disponibilidad" />
 </form>
+<!-- Show results of search below -->
+{% if data.results %}
+<div class="form-results">
+  <h2>Resultados de Búsqueda</h2>
+  {% for rec in data.results %}
+  <form method="post" class="register-view">
+    <fieldset>
+      <label for="">Libro</label>
+      <input type="text" value="{{rec.titulo}}" /><br />
+      <label for="">Número de Serie</label>
+      <input type="text" value="{{rec.serial_num}}" />
+      <hr />
+      <input class="btn btn-primary" type="submit" value="Crear Registro de Préstamo" />
+    </fieldset>
+  </form>
+  {% endfor %}
+</div>
+{% endif %}
 <aside class="aside-options">
   <div class="title-aside">
     <p>Opciones</p>

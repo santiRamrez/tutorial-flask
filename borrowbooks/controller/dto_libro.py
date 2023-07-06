@@ -68,5 +68,19 @@ class dto_libro:
                 total = total + x
         return total
 
+    def listar_ejempl_disponib_porsede(self, isbn, id_sede):
+        start_dao = dao_libro()
+        db_list = start_dao.listar_ejemplares_disponibles_por_sede(isbn, id_sede)
+        output = []
+        if db_list:
+            for record in db_list:
+                libro = {}
+                libro['serial_num'] = record[0]
+                libro['isbn'] = record[1]
+                libro['titulo'] = record[2]
+                output.append(libro)
+            return output
+        else:
+            False
 
         

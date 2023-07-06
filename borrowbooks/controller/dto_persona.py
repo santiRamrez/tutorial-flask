@@ -36,5 +36,17 @@ class dto_persona:
             return start_persona.getLista()
         else:
             return False
+        
+    def listar_beneficiarios(self):
+        Dao_Persona = dao_persona()
+        info_db = Dao_Persona.listar_beneficiarios()
+        output = []
+        if info_db:
+            for record in info_db:
+                output.append(persona(*record))
+            return output
+        else:
+            return False
+
 
   

@@ -48,6 +48,27 @@ class dao_persona:
 
         return result
     
+    def listar_beneficiarios(self):
+        # -- Estudiante: 2 / Docente: 3
+        query = "SELECT * FROM persona WHERE perfil_id = 2 or perfil_id = 3;"
+        c = self.getConex()
+        cursor = c.cursor()
+        result = None
+        try:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            c.commit()
+
+        except Exception as ex:
+            click.echo(ex)
+            result = False
+
+        finally:
+            cursor.close()
+            c.close()
+
+        return result
+    
     def agregar_persona(self, per):
         query = """INSERT INTO persona (run, nombre, apellido_pat, apellido_mat, telefono, fecha_nacimien, perfil_id, sede_id, passwrd, email) 
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
