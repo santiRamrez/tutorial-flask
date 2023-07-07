@@ -44,19 +44,21 @@ def register():
     
     if request.method == 'POST':
         #Si está activo el modal stock y recibe datos de esa etiqueta form para ASIGNAR STOCK POR SEDE
-        if request.form['stock'] == 'on':
-            #Inicia proceso de agregar stock por libro.
-            sede_stock = int(request.form['stockSede'])
-            libro_stock = request.form['stockLibro']
-            qty_stock = int(request.form['qtyStock'])
+        click.echo(request.form)
+        if 'stock' in request.form:
+            if request.form['stock'] == 'on':
+                #Inicia proceso de agregar stock por libro.
+                sede_stock = int(request.form['stockSede'])
+                libro_stock = request.form['stockLibro']
+                qty_stock = int(request.form['qtyStock'])
 
-            inicia_sede = Sede()
-            txt_selected_sede = inicia_sede.filtra_por_id(sede_stock)
-        
-            num_agregados = dto_libro().agregar_qty_ejemplares(libro_stock, sede_stock, qty_stock)
-            if num_agregados > 0:
-                flash(f"Se han agregado {num_agregados} unidades a la sede {txt_selected_sede.descrip}")
+                inicia_sede = Sede()
+                txt_selected_sede = inicia_sede.filtra_por_id(sede_stock)
             
+                num_agregados = dto_libro().agregar_qty_ejemplares(libro_stock, sede_stock, qty_stock)
+                if num_agregados > 0:
+                    flash(f"Se han agregado {num_agregados} unidades a la sede {txt_selected_sede.descrip}")
+                
     
         else:
         #Crea registro de un libro nuevo
